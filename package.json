@@ -1,0 +1,24 @@
+{
+  "name": "pepino",
+  "version": "1.0.0",
+  "description": "A GUI app for cucumber",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/si-mikey/pepino.git"
+  },
+  "keywords": [
+    "cucumber",
+    "tests",
+    "automation"
+  ],
+  "author": "Luis Lopez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/si-mikey/pepino/issues"
+  },
+  "homepage": "https://github.com/si-mikey/pepino#readme"
+}
