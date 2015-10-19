@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/si-mikey/pepino#readme",
   "dependencies": {
-    "hapi": "^11.0.0"
+    "hapi": "^11.0.0",
+    "yamljs": "^0.2.4"
   }
 }
