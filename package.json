@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/si-mikey/pepino/issues"
   },
-  "homepage": "https://github.com/si-mikey/pepino#readme"
+  "homepage": "https://github.com/si-mikey/pepino#readme",
+  "dependencies": {
+    "hapi": "^11.0.0"
+  }
 }
