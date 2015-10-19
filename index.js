@@ -1,10 +1,22 @@
 var Hapi = require('hapi');
-var server = new Hapi.Server();
+var Server = new Hapi.Server();
+var YAML = require('yamljs').load('config/config.yml');
+
+function env_config(config){
+  if(process.env.ENV === 'prod'){
+    return config.production;
+  }else{
+    return config.development;
+  } 
+}
+var config = env_config(YAML);
 
 
-server.connection({port: 3000});
-server.start(function(){
-  console.log(server);
+
+
+
+Server.connection({port: config.server.port });
+Server.start(function(){
+  console.log("Server Started on: " + Server.info.uri);
 });
-
 
