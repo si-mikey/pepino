@@ -1,6 +1,8 @@
 var Hapi = require('hapi');
 var Server = new Hapi.Server();
-var YAML = require('yamljs').load('config/config.yml');
+var Yaml = require('yamljs').load('config/config.yml');
+var Jade = require('jade');
+var Path = require('path');
 
 function env_config(config){
   if(process.env.ENV === 'prod'){
@@ -9,9 +11,33 @@ function env_config(config){
     return config.development;
   } 
 }
-var config = env_config(YAML);
+var config = env_config(Yaml);
 
 Server.connection({port: config.server.port});
+
+server.views({
+  engines: {
+    jade: Jade
+  },
+  path: Path.join(__dirname, '/lib/views'),
+  isCached: process.env.ENV === 'prod'
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Server.route({
