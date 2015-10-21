@@ -11,11 +11,18 @@ function env_config(config){
 }
 var config = env_config(YAML);
 
+Server.connection({port: config.server.port});
+
+
+Server.route({
 
 
 
 
-Server.connection({port: config.server.port });
+
+
+
+
 Server.start(function(){
   console.log("Server Started on: " + Server.info.uri);
 });
