@@ -15,8 +15,13 @@ Server.connection({port: config.server.port});
 
 
 Server.route({
-
-
+  method: 'GET',
+  path: '/',
+  handler: function (request, reply){
+    reply('YESSSSSS');
+    console.log(reply);
+  }
+});
 
 
 
