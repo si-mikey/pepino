@@ -15,7 +15,12 @@ var config = env_config(Yaml);
 
 Server.connection({port: config.server.port});
 
-server.views({
+Server.register(require('vision'), function(err){
+  if(err)
+    throw err;
+});
+
+Server.views({
   engines: {
     jade: Jade
   },
@@ -25,29 +30,30 @@ server.views({
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Server.route({
   method: 'GET',
   path: '/',
   handler: function (request, reply){
-    reply('YESSSSSS');
-    console.log(reply);
+
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
