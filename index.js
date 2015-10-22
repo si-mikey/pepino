@@ -27,7 +27,6 @@ Server.register(Inert, function(err){
     throw err;
 });
 
-
 Server.views({
   engines: {
     jade: Jade
@@ -50,11 +49,13 @@ Server.route({
     } 
 });
 
+
+
 Server.route({
   method: 'GET',
   path: '/',
   handler: function (request, reply){
-    reply.view('header');
+    reply.view('create');
   }
 });
 
