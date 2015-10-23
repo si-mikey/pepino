@@ -1,5 +1,5 @@
 var Create = function(){};
 
-Create.prototype.addInput = function(form, position){
+Create.prototype.addStep = function(form, position){
 
 }
