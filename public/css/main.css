@@ -23,6 +23,14 @@ html, body{
   height: 100%;
 }
 
+#create-form .form-control{
+  width: 500px;
+  margin: 0 auto;
+}
+
+
+
+
 /* Body styles */
 
 

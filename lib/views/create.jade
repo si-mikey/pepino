@@ -1,10 +1,14 @@
 include header.jade
 
 div.fill.container.bod-container
-  button.btn.btn-primary(type='button') Create Scenario
- 
-
-
+  div.container.create-controls
+    button.btn.btn-primary(type='button') Add Step
+  
+  div.form-container.container 
+    form#create-form
+      div.form-group
+        input.form-control#scenario-name(placeholder="Scenario Name", name="scenario_name")
+  
 
 
 
