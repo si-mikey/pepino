@@ -32,7 +32,9 @@ html, body{
   float: right;
 }
 
-
+#create-form .input-group{
+  margin-bottom: 5px;
+}
 
 /* Body styles */
 

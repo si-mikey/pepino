@@ -2,18 +2,23 @@ include header.jade
 
 div.fill.container.bod-container
   div.container.create-controls
-    button.btn.btn-primary(type='button') Add Step
+    button#add-step.btn.btn-primary(type='button') Add Step
   
   div.form-container.container 
     form#create-form
       div.form-group
         div.input-group
           div.input-group-addon Scenario Name:
-          input.form-control#scenario-name(placeholder="Scenario Name", name="scenario_name")
+          input.form-control#scenario-name(name="scenario_name")
   
 
-
-
+script(type='text/javascript').
+  $(document).ready(function(){
+    var create = new Create();
+      $("#add-step").on("click", function(){
+        create.addStep(".form-group", "Given");
+      });
+  });
 
 
 
