@@ -15,9 +15,16 @@ div.fill.container.bod-container
 script(type='text/javascript').
   $(document).ready(function(){
     var create = new Create();
-      $("#add-step").on("click", function(){
-        create.addStep(".form-group", "Given");
-      });
+    $("#add-step").on("click", function(){
+     create.addStep(".form-group", "Step");
+    });
+   
+    $(".form-group").on("dblclick", ".input-group-addon", function(){
+      $(this).html("<select class='step-type'><option>Given</option><option>When</option><option>Then</option><option>And</option><option>But</option></select>"); 
+
+    }); 
+   
+   
   });
 
 
