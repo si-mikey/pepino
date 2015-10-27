@@ -42,6 +42,10 @@ html, body{
   color: #f00;
 }
 
+.glyphicon-remove:hover{
+  cursor: pointer
+}
+
 /* Body styles */
 
 
