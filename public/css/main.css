@@ -36,6 +36,12 @@ html, body{
   margin-bottom: 5px;
 }
 
+.glyphicon-remove{
+  position: absolute;
+  right: -20px;
+  color: #f00;
+}
+
 /* Body styles */
 
 

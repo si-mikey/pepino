@@ -21,10 +21,13 @@ script(type='text/javascript').
    
     $(".form-group").on("dblclick", ".input-group-addon", function(){
       $(this).html("<select class='step-type'><option>Given</option><option>When</option><option>Then</option><option>And</option><option>But</option></select>"); 
-
     }); 
    
-   
+    $(".form-group").on("dblclick", ".glyphicon-remove", function(){
+     $(this).parent().remove();
+    }); 
+  
+ 
   });
 
 
