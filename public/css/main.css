@@ -28,7 +28,7 @@ html, body{
   margin: 0 auto;
 }
 
-.create-controls button{
+.create-controls button, .submit-controls button{
   float: right;
 }
 
@@ -45,6 +45,11 @@ html, body{
 .glyphicon-remove:hover{
   cursor: pointer
 }
+
+.step-type{
+  font-size: 20px;
+}
+
 
 /* Body styles */
 

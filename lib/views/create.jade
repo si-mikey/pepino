@@ -11,6 +11,8 @@ div.fill.container.bod-container
           div.input-group-addon Scenario Name:
           input.form-control#scenario-name(name="scenario_name")
   
+  div.container.submit-controls
+    button#submit-step.btn.btn-primary(type='button') Submit Scenario
 
 script(type='text/javascript').
   $(document).ready(function(){
@@ -20,7 +22,12 @@ script(type='text/javascript').
     });
    
     $(".form-group").on("dblclick", ".input-group-addon", function(){
-      $(this).html("<select class='step-type'><option>Given</option><option>When</option><option>Then</option><option>And</option><option>But</option></select>"); 
+      $(this).html("<select class='step-type'>" +
+        "<option value='given'>Given</option>" +
+        "<option value='when'>When</option>" +
+        "<option value='then'>Then</option>" +
+        "<option value='and'>And</option>" +
+        "<option value='but'>But</option></select>");
     }); 
    
     $(".form-group").on("dblclick", ".glyphicon-remove", function(){
@@ -29,6 +36,7 @@ script(type='text/javascript').
   
  
   });
+
 
 
 
