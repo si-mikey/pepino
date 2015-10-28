@@ -12,7 +12,7 @@ div.fill.container.bod-container
           input.form-control#scenario-name(name="scenario_name")
   
   div.container.submit-controls
-    button#submit-step.btn.btn-primary(type='button') Submit Scenario
+    button#submit-scenario.btn.btn-primary(type='submit') Submit Scenario
 
 script(type='text/javascript').
   $(document).ready(function(){
@@ -22,7 +22,7 @@ script(type='text/javascript').
     });
    
     $(".form-group").on("dblclick", ".input-group-addon", function(){
-      $(this).html("<select class='step-type'>" +
+      $(this).html("<select name='step_type' class='step-type'>" +
         "<option value='given'>Given</option>" +
         "<option value='when'>When</option>" +
         "<option value='then'>Then</option>" +
@@ -31,9 +31,18 @@ script(type='text/javascript').
     }); 
    
     $(".form-group").on("dblclick", ".glyphicon-remove", function(){
-     $(this).parent().remove();
-    }); 
-  
+      $(this).parent().remove();
+    });
+    
+    $("#submit-scenario").on("click", function(){
+      $("#create-form").trigger("submit");
+    });
+    
+    $("#create-form").on("submit", function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      console.log($(this).serializeArray());
+    });
  
   });
 
