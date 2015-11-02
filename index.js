@@ -63,7 +63,7 @@ Server.route({
   method: 'POST',
   path: '/api/scenario/send',
   handler: function (request, reply){
-    request.reply(request.payload); 
+    reply('result of post req ' + request.payload); 
   }
 });
 

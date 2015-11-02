@@ -40,10 +40,9 @@ Create.prototype.addStepType = function(){
 };
 
 Create.prototype.send = function(scenario){
-  console.log(scenario['step_type_1']);
   return $.ajax({
          type: "POST",
          url: "/api/scenario/send",
-         data: {scenario: scenario }
+         data: {scenario: 'omfg' }
          });
 };
