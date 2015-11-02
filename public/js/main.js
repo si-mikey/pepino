@@ -1,7 +1,6 @@
 var Create = function(){};
 
 var stepNameCount = 0;
-
 Create.prototype.addStep = function(insertionPoint, type){
   var inputGroupClass = "input-group";
   var inputGroupAddonClass = "input-group-addon";
@@ -21,5 +20,30 @@ Create.prototype.addStep = function(insertionPoint, type){
 
   $(inputGroup).append([inputGroupAddon, stepInput, stepRemove]);
   $(insertionPoint).append(inputGroup);
+};
 
-}
+var stepTypeCount = 0;
+Create.prototype.addStepType = function(){
+  var selectTypes = document.createElement("select");
+  selectTypes.className = 'step-type'
+  selectTypes.name = 'step_type_' + (stepTypeCount += 1);
+  var types = ['Given', 'When', 'And', 'Then', 'But'];
+  var optArr = [];
+  types.forEach(function(t){
+    var opt = document.createElement("option");
+    opt.text = t;
+    opt.value = t;
+    optArr.push(opt); 
+  }); 
+  $(selectTypes).append(optArr); 
+  return selectTypes;
+};
+
+Create.prototype.send = function(scenario){
+  console.log(scenario['step_type_1']);
+  return $.ajax({
+         type: "POST",
+         url: "/api/scenario/send",
+         data: {scenario: scenario }
+         });
+};

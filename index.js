@@ -59,7 +59,13 @@ Server.route({
   }
 });
 
-
+Server.route({
+  method: 'POST',
+  path: '/api/scenario/send',
+  handler: function (request, reply){
+    request.reply(request.payload); 
+  }
+});
 
 
 

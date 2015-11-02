@@ -22,12 +22,7 @@ script(type='text/javascript').
     });
    
     $(".form-group").on("dblclick", ".input-group-addon", function(){
-      $(this).html("<select name='step_type' class='step-type'>" +
-        "<option value='given'>Given</option>" +
-        "<option value='when'>When</option>" +
-        "<option value='then'>Then</option>" +
-        "<option value='and'>And</option>" +
-        "<option value='but'>But</option></select>");
+      $(this).html(create.addStepType());
     }); 
    
     $(".form-group").on("dblclick", ".glyphicon-remove", function(){
@@ -37,11 +32,15 @@ script(type='text/javascript').
     $("#submit-scenario").on("click", function(){
       $("#create-form").trigger("submit");
     });
-    
+   
     $("#create-form").on("submit", function(event){
       event.preventDefault();
       event.stopPropagation();
-      console.log($(this).serializeArray());
+      scenarioData = _.object(_.map($(this).serializeArray()), _.values);
+      var scenarioSendPromise = create.send(scenarioData);
+      scenarioSendPromise.success(function(){
+        console.log('Looks good');
+      });
     });
  
   });
