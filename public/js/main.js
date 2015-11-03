@@ -43,6 +43,6 @@ Create.prototype.send = function(scenario){
   return $.ajax({
          type: "POST",
          url: "/api/scenario/send",
-         data: {scenario: 'omfg' }
+         data: scenario 
          });
 };
