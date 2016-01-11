@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+
+if [ -z $@ ]
+  then 
+    echo "No Action Detected";
+    echo ""
+    echo "Usage:"
+    echo "$0 export or import"
+    exit 1;
+fi  
+
+# import the db
+function import_db {
+  echo "importing db...";
+  exec  mysql -uroot pepino < lib/sql/core.sql;
+}
+
+# export the db
+function export_db {
+  echo "exporting db..."
+  exec  mysqldump -uroot pepino > lib/sql/core.sql
+}
+
+[[ $@ =~ "export" ]] && export_db; 
+[[ $@ =~ "import" ]] && import_db;
+
