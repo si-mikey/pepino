@@ -1,6 +1,6 @@
 var Hapi = require('hapi');
 var Server = new Hapi.Server();
-var Yaml = require('yamljs').load('config/config.yml');
+var Config  = require('yamljs').load('config/config.yml');
 var Jade = require('jade');
 var Path = require('path');
 var Vision = require('vision');
@@ -13,7 +13,7 @@ function env_config(config){
     return config.development;
   } 
 }
-var config = env_config(Yaml);
+var config = env_config(Config);
 
 Server.connection({port: config.server.port});
 
@@ -48,7 +48,6 @@ Server.route({
       }
     } 
 });
-
 
 
 Server.route({
