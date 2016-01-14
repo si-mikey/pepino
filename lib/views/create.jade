@@ -38,6 +38,7 @@ script(type='text/javascript').
       event.stopPropagation();
       var scenarioObject = {};
       var scenarioData = $(this).serializeArray();
+      console.log(scenarioData);
       _.each(scenarioData, function(o){
         scenarioObject[o.name] = o.value;
       });

@@ -5,6 +5,7 @@ var Jade = require('jade');
 var Path = require('path');
 var Vision = require('vision');
 var Inert = require('inert');
+var Scenario = require('./lib/controllers/scenarios.js');
 
 function env_config(config){
   if(process.env.ENV === 'prod'){
@@ -63,7 +64,18 @@ Server.route({
   path: '/api/scenario/send',
   handler: function (request, reply){
     console.log(request.payload);
-    reply('result of post req ' + request.payload); 
+    if (request.payload !== null){
+      var scenarioObject = {};
+      scenarioObject.scenario = request.payload;
+      scenarioObject.author = 'Luis';
+      scenarioObject.mod_by = 'Luis';
+      scenarioObject.active = true; 
+      if(Scenario.save(scenarioObject)){
+        reply('Scenario saved').code(200);
+      }else{
+        reply('Error saving scenario').code(400);
+      }
+    }
   }
 });
 
