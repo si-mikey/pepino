@@ -70,11 +70,13 @@ Server.route({
       scenarioObject.author = 'Luis';
       scenarioObject.mod_by = 'Luis';
       scenarioObject.active = true; 
-      if(Scenario.save(scenarioObject)){
-        reply('Scenario saved').code(200);
-      }else{
-        reply('Error saving scenario').code(400);
-      }
+      Scenario.save(scenarioObject, function(result){
+        if(result === null){
+          reply("Scenario Saved").code(200);
+        }else{
+          reply("Scenario save error: " + result).code(400);
+        }
+      })
     }
   }
 });
