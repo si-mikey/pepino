@@ -27,6 +27,7 @@
     "inert": "^3.1.0",
     "jade": "^1.11.0",
     "mongoose": "^4.3.5",
+    "node-inspector": "^0.12.5",
     "qs": "^4.0.0",
     "vision": "^3.0.0",
     "yamljs": "^0.2.4"

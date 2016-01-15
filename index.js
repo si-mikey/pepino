@@ -7,6 +7,7 @@ var Vision = require('vision');
 var Inert = require('inert');
 var Scenario = require('./lib/controllers/scenarios.js');
 
+
 function env_config(config){
   if(process.env.ENV === 'prod'){
     return config.production;
