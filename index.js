@@ -56,9 +56,21 @@ Server.route({
   method: 'GET',
   path: '/',
   handler: function (request, reply){
-    reply.view('create');
+    reply.view('login');
   }
 });
+
+
+Server.route({
+  method: 'GET',
+  path: '/login',
+  handler: function(request, reply){
+  
+  }
+});
+
+
+
 
 Server.route({
   method: 'POST',

@@ -11,7 +11,7 @@ div.fill.container.bod-container
       div.form-group
         div.input-group
           div.input-group-addon Scenario Name:
-          input.form-control#scenario-name(name="scenario_name")
+          input.form-control#scenario-name(name="scenario_name", required)
   
   div.container.submit-controls
     button#submit-scenario.btn.btn-primary(type='submit') Submit Scenario
@@ -19,6 +19,7 @@ div.fill.container.bod-container
 script(type='text/javascript').
   $(document).ready(function(){
     var create = new Create();
+    var formValidation = new FormValidation();
     $("#add-step").on("click", function(){
      create.addStep(".form-group", "Step");
     });
@@ -38,9 +39,10 @@ script(type='text/javascript').
     $("#create-form").on("submit", function(event){
       event.preventDefault();
       event.stopPropagation();
+      if(!formValidation.allInputsSet("#create-form"))
+        return; 
       var scenarioObject = {};
       var scenarioData = $(this).serializeArray();
-      console.log(scenarioData);
       _.each(scenarioData, function(o){
         scenarioObject[o.name] = o.value;
       });

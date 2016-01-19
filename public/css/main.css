@@ -11,6 +11,11 @@ html, body{
 
 /* Body styles */
 
+.has-err{
+    border: 2px solid red;
+  }
+
+
 .action-status{
   width: 500px;
   text-align: center;

@@ -46,3 +46,20 @@ Create.prototype.send = function(scenario){
          data: scenario 
          });
 };
+
+
+
+var FormValidation = function(){};
+FormValidation.prototype.allInputsSet = function(form){
+  var errCount = 0;
+  $(form + " .form-control").each(function(){
+    if(this.value === null || this.value === ''){
+      $(this).addClass("has-err");
+      errCount += 1; 
+    }else{
+      $(this).removeClass("has-err");
+    }
+  })
+  return (errCount > 0) ? false : true; 
+};  
+
