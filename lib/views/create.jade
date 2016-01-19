@@ -4,6 +4,8 @@ div.fill.container.bod-container
   div.container.create-controls
     button#add-step.btn.btn-primary(type='button') Add Step
   
+  div.container.alert.action-status 
+
   div.form-container.container 
     form#create-form
       div.form-group
@@ -44,11 +46,12 @@ script(type='text/javascript').
       });
       create.send(scenarioObject).success(function(){
         console.log('Successfully submitted scenario');
+        $(".action-status").addClass("alert-success").html("Succesfully submitted scenario");
       }).fail(function(err){
         console.log("Unable to create scenario: " + err);
+        $(".action-status").addClass("alert-danger").html("Failed saving scenario");
       });
     });
- 
   });
 
 

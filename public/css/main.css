@@ -11,6 +11,11 @@ html, body{
 
 /* Body styles */
 
+.action-status{
+  width: 500px;
+  text-align: center;
+}
+
 .bod-container {
   background-color: #ddd;
   width: 100%;
