@@ -9,17 +9,21 @@ html, body{
 
 /* Navigation styles */
 
+
 /* Body styles */
+
+.form-signin{
+  margin: 0 auto;
+  width: 500px;
+}
+
+.checkbox label{
+ margin-left: 5px;
+}
 
 .has-err{
     border: 2px solid red;
   }
-
-
-.action-status{
-  width: 500px;
-  text-align: center;
-}
 
 .bod-container {
   background-color: #ddd;
@@ -33,6 +37,12 @@ html, body{
   height: 100%;
 }
 
+.action-status{
+  width: 500px;
+  text-align: center;
+}
+
+/* CREATE SCENARIO PAGE STYLES */ 
 #create-form .form-group{
   width: 500px;
   margin: 0 auto;
@@ -60,6 +70,8 @@ html, body{
 .step-type{
   font-size: 20px;
 }
+
+/* CREATE SCENARIO STYLES */
 
 
 /* Body styles */

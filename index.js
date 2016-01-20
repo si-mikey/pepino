@@ -1,5 +1,5 @@
 var Hapi = require('hapi');
-var Server = new Hapi.Server();
+var Server = new Hapi.Server({debug: {request: ['error']}});
 var Config  = require('yamljs').load('config/config.yml');
 var Jade = require('jade');
 var Path = require('path');
@@ -51,26 +51,21 @@ Server.route({
     } 
 });
 
-
 Server.route({
   method: 'GET',
-  path: '/',
+  path: '/create',
   handler: function (request, reply){
-    reply.view('login');
+    reply.view('create');
   }
 });
-
 
 Server.route({
   method: 'GET',
   path: '/login',
-  handler: function(request, reply){
-  
+  handler: function (request, reply){
+    reply.view('login'); 
   }
 });
-
-
-
 
 Server.route({
   method: 'POST',
@@ -83,18 +78,16 @@ Server.route({
       scenarioObject.author = 'Luis';
       scenarioObject.mod_by = 'Luis';
       scenarioObject.active = true; 
-      Scenario.save(scenarioObject, function(result){
-        if(result === null){
-          reply("Scenario Saved").code(200);
-        }else{
+      Scenario.save(scenarioObject, function(err, result){
+        if (err){
           reply("Scenario save error: " + result).code(400);
+        }else{
+          reply("Scenario Saved").code(200);
         }
       })
     }
   }
 });
-
-
 
 
 
