@@ -1,7 +1,7 @@
 include header.jade
 
 div.fill.container.bod-container
-  form.form-signin(action="/doLogin")
+  form.form-signin(action="/doLogin", method="POST")
     h2.form-signin-heading Sign in
     label.sr-only(for="inputEmail") Email Address:
     input.form-control#inputEmail(type="email", placeholder="Email Address", name="email", required, autofocus)

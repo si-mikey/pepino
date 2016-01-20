@@ -6,6 +6,7 @@ var Path = require('path');
 var Vision = require('vision');
 var Inert = require('inert');
 var Scenario = require('./lib/controllers/scenarios.js');
+var Users = require('./lib/controllers/users.js');
 
 
 function env_config(config){
@@ -73,7 +74,16 @@ Server.route({
   method: 'POST',
   path: '/doLogin',
   handler: function (request, reply){
-  
+    var email = request.payload.email;
+    var password = request.payload.password;
+    Users.findByEmailAndPassword(email, password, function(err, user){
+      if (err) return console.error(err);
+      if(user !== null){
+        reply("Login Success!").code(302); 
+      }else{
+        reply("User not found!").code(404);
+      }
+    });
   }
 });
 
@@ -84,11 +94,6 @@ Server.route({
     reply.view('create');
   }
 });
-
-
-
-
-
 
 
 
