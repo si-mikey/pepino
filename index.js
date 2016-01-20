@@ -29,6 +29,15 @@ Server.register(Inert, function(err){
     throw err;
 });
 
+Server.register({
+  register: require('hapi-server-session'),
+  options: {
+    cookie: {
+      isSecure: false,
+    },
+  },
+}, function(err){ if (err) { throw err; } });
+
 Server.views({
   engines: {
     jade: Jade
@@ -51,13 +60,6 @@ Server.route({
     } 
 });
 
-Server.route({
-  method: 'GET',
-  path: '/create',
-  handler: function (request, reply){
-    reply.view('create');
-  }
-});
 
 Server.route({
   method: 'GET',
@@ -66,6 +68,29 @@ Server.route({
     reply.view('login'); 
   }
 });
+
+Server.route({
+  method: 'POST',
+  path: '/doLogin',
+  handler: function (request, reply){
+  
+  }
+});
+
+Server.route({
+  method: 'GET',
+  path: '/create',
+  handler: function (request, reply){
+    reply.view('create');
+  }
+});
+
+
+
+
+
+
+
 
 Server.route({
   method: 'POST',
