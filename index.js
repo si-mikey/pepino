@@ -80,6 +80,7 @@ Server.route({
       if (err) return console.error(err);
       if(user !== null){
         reply("Login Success!").code(302); 
+        request.session.user = user;
       }else{
         reply("User not found!").code(404);
       }
@@ -94,7 +95,6 @@ Server.route({
     reply.view('create');
   }
 });
-
 
 
 Server.route({
