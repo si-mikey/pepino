@@ -31,13 +31,16 @@ Server.register(Inert, function(err){
 });
 
 Server.register({
-  register: require('hapi-server-session'),
+  register: require('yar'),
   options: {
-    cookie: {
-      isSecure: false,
-    },
-  },
-}, function(err){ if (err) { throw err; } });
+    storeBlank: false,
+    cookieOptions: {
+      password: process.env.SESSION_KEY,
+      isSecure: false
+    }
+  }
+}, function(err) { if (err) console.error(err) });
+
 
 Server.views({
   engines: {
@@ -72,15 +75,16 @@ Server.route({
 
 Server.route({
   method: 'POST',
-  path: '/doLogin',
+  path: '/api/doLogin',
   handler: function (request, reply){
     var email = request.payload.email;
     var password = request.payload.password;
+    console.log(request.payload);
     Users.findByEmailAndPassword(email, password, function(err, user){
       if (err) return console.error(err);
       if(user !== null){
-        reply("Login Success!").code(302); 
-        request.session.user = user;
+        request.yar.set('user', user);
+        reply("Login Success!").code(302);
       }else{
         reply("User not found!").code(404);
       }

@@ -1,7 +1,7 @@
 include header.jade
 
 div.fill.container.bod-container
-  form.form-signin(action="/doLogin", method="POST")
+  form#signin-form.form-signin(action="/doLogin", method="POST")
     h2.form-signin-heading Sign in
     label.sr-only(for="inputEmail") Email Address:
     input.form-control#inputEmail(type="email", placeholder="Email Address", name="email", required, autofocus)
@@ -12,10 +12,23 @@ div.fill.container.bod-container
         input(type="checkbox", value="remember-me") 
     button.btn.btn-lg.btn-primary.btn-block(type="submit") Sign in
 
+script(type='text/javascript').
+  $(document).ready(function(){
+    var login = new Login;
+    $("#signin-form").on("submit", function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      var email = $("#inputEmail").val();
+      var password = $("#inputPassword").val();
+      console.log(login.authenticate(email, password));
+    });
 
 
 
 
+
+
+  });
 
 
 
