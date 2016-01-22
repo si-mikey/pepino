@@ -66,9 +66,15 @@ var Login =  function(){};
 Login.prototype.authenticate = function(email, pass){
   return $.ajax({
          type: "POST",
-         url: "/api/doLogin",
+         url: "/api/auth",
          data: {'email': email, 'password': pass} 
          });
 };
 
+function getParamByName(name) {
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+};
 

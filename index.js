@@ -65,6 +65,26 @@ Server.route({
 });
 
 
+function isAuthenticated(req){
+  if(req.yar.get("user")){
+    return true;
+  }else{
+    return false;
+  } 
+};
+
+Server.route({
+  method: 'GET',
+  path: '/create',
+  handler: function (request, reply){
+    if(isAuthenticated(request)){
+      reply.view('create');
+    }else{
+      reply.redirect("/login");
+    }
+  }
+});
+
 Server.route({
   method: 'GET',
   path: '/login',
@@ -75,31 +95,21 @@ Server.route({
 
 Server.route({
   method: 'POST',
-  path: '/api/doLogin',
+  path: '/api/auth',
   handler: function (request, reply){
     var email = request.payload.email;
     var password = request.payload.password;
-    console.log(request.payload);
     Users.findByEmailAndPassword(email, password, function(err, user){
       if (err) return console.error(err);
       if(user !== null){
         request.yar.set('user', user);
-        reply("Login Success!").code(302);
+        reply("Login Success!").code(200);
       }else{
         reply("User not found!").code(404);
       }
     });
   }
 });
-
-Server.route({
-  method: 'GET',
-  path: '/create',
-  handler: function (request, reply){
-    reply.view('create');
-  }
-});
-
 
 Server.route({
   method: 'POST',

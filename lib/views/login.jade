@@ -1,7 +1,8 @@
 include header.jade
 
-div.fill.container.bod-container
-  form#signin-form.form-signin(action="/doLogin", method="POST")
+div.fill.container.bod-container#login-page
+  div.container.alert.action-status
+  form#signin-form.form-signin(action="/api/auth", method="POST")
     h2.form-signin-heading Sign in
     label.sr-only(for="inputEmail") Email Address:
     input.form-control#inputEmail(type="email", placeholder="Email Address", name="email", required, autofocus)
@@ -20,11 +21,15 @@ script(type='text/javascript').
       event.stopPropagation();
       var email = $("#inputEmail").val();
       var password = $("#inputPassword").val();
-      console.log(login.authenticate(email, password));
+      login.authenticate(email, password).done(function(result){
+        window.location.replace("/create");
+        }).fail(function(err){
+          window.location.replace("?login=false");
+        });
     });
-
-
-
+    var loginStatus =  getParamByName('login');
+    if(loginStatus === 'false')
+      $(".action-status").addClass("alert-danger").html("Incorrect email/password combination");
 
 
 

@@ -42,6 +42,17 @@ html, body{
   text-align: center;
 }
 
+/* LOGIN PAGE STYLES */
+#login-page{
+  padding-top: 20px;
+}
+
+/* LOGIN PAGE STYLES */
+
+
+
+
+
 /* CREATE SCENARIO PAGE STYLES */ 
 #create-form .form-group{
   width: 500px;
