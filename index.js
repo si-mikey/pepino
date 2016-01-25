@@ -74,6 +74,18 @@ function isAuthenticated(req){
 };
 
 Server.route({
+    method: 'GET',
+    path: '/',
+    handler: function(request, reply){
+      if(isAuthenticated(request)){
+        reply.view('create');
+      }else{
+        reply.redirect('/login');
+      }
+    }
+});
+
+Server.route({
   method: 'GET',
   path: '/create',
   handler: function (request, reply){

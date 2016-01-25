@@ -14,7 +14,7 @@ Create.prototype.addStep = function(insertionPoint, type){
   inputGroup.className = inputGroupClass;
   inputGroupAddon.className = inputGroupAddonClass;
   stepRemove.className = "glyphicon glyphicon-remove";
-  inputGroupAddon.innerHTML = type + " :";
+  $(inputGroupAddon).html(this.addStepType());
   stepInput.className = "form-control";
   stepInput.name = stepInputName;
 

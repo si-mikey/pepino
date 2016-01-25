@@ -22,13 +22,12 @@ script(type='text/javascript').
     var formValidation = new FormValidation();
 
     $("#add-step").on("click", function(){
-     create.addStep(".form-group", "Step");
-     $(".form-group");
+      create.addStep(".form-group", "Step");
     });
    
-    $(".form-group").on("dblclick", ".input-group-addon", function(){
-      $(this).html(create.addStepType());
-    }); 
+   // $(".form-group").on("dblclick", ".input-group-addon", function(){
+   //   $(this).html(create.addStepType());
+   // }); 
    
     $(".form-group").on("dblclick", ".glyphicon-remove", function(){
       $(this).parent().remove();
