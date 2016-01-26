@@ -127,21 +127,22 @@ Server.route({
   method: 'POST',
   path: '/api/scenario/send',
   handler: function (request, reply){
-    console.log(request.payload);
-    if (request.payload !== null){
-      var scenarioObject = {};
-      scenarioObject.scenario = request.payload;
-      scenarioObject.author = 'Luis';
-      scenarioObject.mod_by = 'Luis';
-      scenarioObject.active = true; 
-      Scenario.save(scenarioObject, function(err, result){
-        if (err){
-          reply("Scenario save error: " + result).code(400);
-        }else{
-          reply("Scenario Saved").code(200);
-        }
-      })
-    }
+    if(isAuthenticated(request)){
+      if (request.payload !== null){
+        var scenarioObject = {};
+        scenarioObject.scenario = request.payload;
+        scenarioObject.author = request.yar.get("user").email;
+        scenarioObject.mod_by = request.yar.get("user").email;
+        scenarioObject.active = true;
+        Scenario.save(scenarioObject, function(err, result){
+          if (err){
+            reply("Scenario save error: " + result).code(400);
+          }else{
+            reply("Scenario Saved").code(200);
+          }
+        })
+      }
+    }else{ reply("Not Authenticated").code(403) }
   }
 });
 
