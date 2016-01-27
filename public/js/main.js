@@ -47,7 +47,6 @@ Create.prototype.send = function(scenario){
          });
 };
 
-
 var FormValidation = function(){};
 FormValidation.prototype.allInputsSet = function(form){
   var errCount = 0;
@@ -62,7 +61,7 @@ FormValidation.prototype.allInputsSet = function(form){
   return (errCount > 0) ? false : true; 
 };  
 
-var Login =  function(){};
+var Login = function(){};
 Login.prototype.authenticate = function(email, pass){
   return $.ajax({
          type: "POST",

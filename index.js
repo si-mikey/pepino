@@ -104,6 +104,20 @@ Server.route({
 });
 
 Server.route({
+  method: 'GET',
+  path: '/queue',
+  handler: function (request, reply){
+    if(isAuthenticated(request)){
+      reply.view('queue');
+    }else{
+      reply("Not Authenticated").code(403);
+    }
+  }
+});
+
+
+// API ROUTES 
+Server.route({
   method: 'POST',
   path: '/api/auth',
   handler: function (request, reply){
@@ -135,7 +149,7 @@ Server.route({
         scenarioObject.mod_by = request.yar.get("user").email;
         scenarioObject.active = true;
         Scenario.save(scenarioObject, function(err, result){
-          if (err) { 
+          if (err) {
             console.error(err);
             reply("Possible duplicate").code(400);
           }else{
