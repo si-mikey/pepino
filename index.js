@@ -41,7 +41,6 @@ Server.register({
   }
 }, function(err) { if (err) console.error(err) });
 
-
 Server.views({
   engines: {
     jade: Jade
@@ -63,7 +62,6 @@ Server.route({
       }
     } 
 });
-
 
 function isAuthenticated(req){
   if(req.yar.get("user")){
@@ -130,13 +128,16 @@ Server.route({
     if(isAuthenticated(request)){
       if (request.payload !== null){
         var scenarioObject = {};
-        scenarioObject.scenario = request.payload;
+        scenarioObject.scenario_name = request.payload.scenario_name;
+        delete request.payload['scenario_name'];
+        scenarioObject.scenario_steps = request.payload;
         scenarioObject.author = request.yar.get("user").email;
         scenarioObject.mod_by = request.yar.get("user").email;
         scenarioObject.active = true;
         Scenario.save(scenarioObject, function(err, result){
-          if (err){
-            reply("Scenario save error: " + result).code(400);
+          if (err) { 
+            console.error(err);
+            reply("Possible duplicate").code(400);
           }else{
             reply("Scenario Saved").code(200);
           }
@@ -145,14 +146,6 @@ Server.route({
     }else{ reply("Not Authenticated").code(403) }
   }
 });
-
-
-
-
-
-
-
-
 
 
 

@@ -43,12 +43,15 @@ script(type='text/javascript').
       _.each(scenarioData, function(o){
         scenarioObject[o.name] = o.value;
       });
-      create.send(scenarioObject).success(function(){
-        console.log('Successfully submitted scenario');
+      create.send(scenarioObject).done(function(){
         $(".action-status").addClass("alert-success").html("Succesfully submitted scenario");
       }).fail(function(err){
-        console.log("Unable to create scenario: " + err);
-        $(".action-status").addClass("alert-danger").html("Failed saving scenario");
+        console.log(err);
+        $(".action-status").addClass("alert-danger").html("Failed saving scenario: " + err.responseText);
+      }).always(function(){
+        window.setTimeout(function(){
+          $(".action-status").removeClass("alert-success").removeClass("alert-danger").html("");
+        }, 3000);
       });
     });
   });
