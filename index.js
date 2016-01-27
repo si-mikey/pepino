@@ -108,13 +108,16 @@ Server.route({
   path: '/queue',
   handler: function (request, reply){
     if(isAuthenticated(request)){
+      Scenario.model.find(function(err, scenarios){
+        if (err) return console.error(err);
+        console.log(scenarios); 
+      });
       reply.view('queue');
     }else{
-      reply("Not Authenticated").code(403);
+      reply.redirect("/login");
     }
   }
 });
-
 
 // API ROUTES 
 Server.route({
