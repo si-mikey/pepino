@@ -5,7 +5,7 @@ div.container.fill.bod-container
   div.table-responsive#scenariosTable
     div.scenario-header SCENARIOS
     - each scenario in scenarios
-      div.scenario-row #{scenario.scenario_name}
+      div.scenario-row(data-id="#{scenario._id}") #{scenario.scenario_name}
 
 
 
