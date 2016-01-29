@@ -110,9 +110,8 @@ Server.route({
     if(isAuthenticated(request)){
       Scenario.model.find(function(err, scenarios){
         if (err) return console.error(err);
-        console.log(scenarios); 
+        reply.view('queue', {scenarios: scenarios}); 
       });
-      reply.view('queue');
     }else{
       reply.redirect("/login");
     }
