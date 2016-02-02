@@ -77,3 +77,11 @@ function getParamByName(name) {
   return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 };
 
+var Queue = function(){};
+Queue.prototype.findById = function(sid){
+  return $.ajax({
+         type: "GET",
+         url: "/api/scenario/findBy/" + sid,
+         });
+};
+

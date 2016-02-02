@@ -9,13 +9,28 @@ div.container.fill.bod-container
 
 
 
+script(type='text/javascript').
+  $(document).ready(function(){
+    var queue = new Queue();
+    var create = new Create();
+    $(".scenario-row").on("dblclick", function(){
+      var sid = $(this).data("id");
+      queue.findById(sid).done(function(scenario){
+        var loop = 1;
+        var sa = [];
+        var steps = scenario.scenario_steps;
+        $.each(steps, function(k, v) {
+          if(steps['step_type_' + loop] !== undefined){
+            sa.push(steps['step_type_' + loop] + " " + steps['step_name_' + loop]);
+            loop += 1; 
+          }
+        });
 
+      }).fail(function(err){
+        console.log(err);
+      });
+    }); 
 
-
-
-
-
-
-
+  });
 
 include footer.jade

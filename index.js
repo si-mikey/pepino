@@ -163,14 +163,16 @@ Server.route({
   }
 });
 
-
-
-
-
-
-
-
-
+Server.route({
+  method: 'GET',
+  path: '/api/scenario/findBy/{id}',
+  handler: function (request, reply){
+    Scenario.findById(request.params.id, function(err, scenario){
+      if (err) console.error(err);
+      reply(scenario).code(200);
+    });
+   }
+});
 
 
 Server.start(function(){
