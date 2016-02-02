@@ -6,15 +6,17 @@ div.container.fill.bod-container
     div.scenario-header SCENARIOS
     - each scenario in scenarios
       div.scenario-row(data-id="#{scenario._id}") #{scenario.scenario_name}
+        div.scenario-steps
 
 
 
 script(type='text/javascript').
   $(document).ready(function(){
     var queue = new Queue();
-    var create = new Create();
     $(".scenario-row").on("dblclick", function(){
       var sid = $(this).data("id");
+      var that = this;
+      var stepArry = [];
       queue.findById(sid).done(function(scenario){
         var loop = 1;
         var sa = [];
@@ -25,12 +27,19 @@ script(type='text/javascript').
             loop += 1; 
           }
         });
+        sa.forEach(function(step){
+          var sdiv = document.createElement("div");
+          var sinput = document.createElement("input");
+          sinput.className = 'form-control';
+          $(sinput).val(step);
+          $(sdiv).append(sinput);
+          stepArry.push(sdiv);
 
+        }); 
       }).fail(function(err){
         console.log(err);
       });
     }); 
-
   });
 
 include footer.jade
