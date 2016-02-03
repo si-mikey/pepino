@@ -34,6 +34,8 @@ script(type='text/javascript').
           var sdiv = document.createElement("div");
           var sinput = document.createElement("input");
           sinput.className = 'form-control';
+          sinput.name = 'step' + loop;
+          loop = loop + 1;
           $(sinput).val(step);
           $(sdiv).append([sinput, ssubmit]);
           stepArry.push(sdiv);
@@ -41,7 +43,7 @@ script(type='text/javascript').
         var sdiv = document.createElement("div");
         var ssubmit = document.createElement("input");
         ssubmit.type = "submit";
-        ssubmit.className = "btn btn-info";
+        ssubmit.className = "btn btn-info update-steps";
         ssubmit.value = "Update";
         $(sdiv).append(ssubmit);
         stepArry.push(sdiv);
@@ -49,7 +51,15 @@ script(type='text/javascript').
       }).fail(function(err){
           console.log(err);
       });
-    }); 
+    });
+
+
+    $(".scenario-steps-form").on("submit", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        $(this).serializeArray();
+    });
+
   });
 
 include footer.jade
