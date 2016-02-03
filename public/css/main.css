@@ -88,11 +88,28 @@ html, body{
 /* QUEUE PAGE STYLE */
 .scenario-row{
   border: 1px solid black;
+  background-color: #fff;
+  padding: 5px;
+  margin-bottom: 5px;
 }
 
+.scenario-row h4:hover{
+  cursor: pointer;
+}
+
+.scenario-row .form-control{
+  margin: 5px;
+}
+
+.scenario-steps div{
+  width: 50%;
+}
+
+.scenario-steps .btn{
+  float: right;
+}
 
 /* QUEUE PAGE STYLE */
-
 
 
 /* Body styles */

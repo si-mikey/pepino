@@ -3,15 +3,18 @@ include header.jade
 
 div.container.fill.bod-container
   div.table-responsive#scenariosTable
-    div.scenario-header SCENARIOS
+    div.scenario-header
+      h5 Unautomated Scenarios
     - each scenario in scenarios
-      div.scenario-row(data-id="#{scenario._id}") #{scenario.scenario_name}
-        div.scenario-steps
-
+      div.scenario-row.clearfix(data-id="#{scenario._id}")
+        h4 #{scenario.scenario_name}
+        form.scenario-steps-form
+          div.scenario-steps
 
 
 script(type='text/javascript').
   $(document).ready(function(){
+
     var queue = new Queue();
     $(".scenario-row").on("dblclick", function(){
       var sid = $(this).data("id");
@@ -32,12 +35,19 @@ script(type='text/javascript').
           var sinput = document.createElement("input");
           sinput.className = 'form-control';
           $(sinput).val(step);
-          $(sdiv).append(sinput);
+          $(sdiv).append([sinput, ssubmit]);
           stepArry.push(sdiv);
-
-        }); 
+        });
+        var sdiv = document.createElement("div");
+        var ssubmit = document.createElement("input");
+        ssubmit.type = "submit";
+        ssubmit.className = "btn btn-info";
+        ssubmit.value = "Update";
+        $(sdiv).append(ssubmit);
+        stepArry.push(sdiv);
+        $(that).children("form").children(".scenario-steps").html(stepArry);
       }).fail(function(err){
-        console.log(err);
+          console.log(err);
       });
     }); 
   });
