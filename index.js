@@ -6,6 +6,7 @@ var Path = require('path');
 var Vision = require('vision');
 var Inert = require('inert');
 var db = require('./lib/db/database.js');
+var knex = require('./lib/models/users.js');
 //var Scenario = require('./lib/controllers/scenarios.js');
 //var Users = require('./lib/controllers/users.js');
 
