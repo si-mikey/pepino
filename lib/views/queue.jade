@@ -57,7 +57,7 @@ script(type='text/javascript').
     $(".scenario-steps-form").on("submit", function(event){
         event.preventDefault();
         event.stopPropagation();
-        $(this).serializeArray();
+        console.log($(this).serializeArray());
     });
 
   });

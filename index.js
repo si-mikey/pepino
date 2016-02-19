@@ -1,22 +1,13 @@
 var Hapi = require('hapi');
 var Server = new Hapi.Server({debug: {request: ['error']}});
-var Config  = require('yamljs').load('config/config.yml');
+var config = require('./config/config.js');
 var Jade = require('jade');
 var Path = require('path');
 var Vision = require('vision');
 var Inert = require('inert');
-var Scenario = require('./lib/controllers/scenarios.js');
-var Users = require('./lib/controllers/users.js');
-
-
-function env_config(config){
-  if(process.env.ENV === 'prod'){
-    return config.production;
-  }else{
-    return config.development;
-  } 
-}
-var config = env_config(Config);
+var db = require('./lib/db/database.js');
+//var Scenario = require('./lib/controllers/scenarios.js');
+//var Users = require('./lib/controllers/users.js');
 
 Server.connection({port: config.server.port});
 
@@ -108,10 +99,10 @@ Server.route({
   path: '/queue',
   handler: function (request, reply){
     if(isAuthenticated(request)){
-      Scenario.model.find(function(err, scenarios){
-        if (err) return console.error(err);
-        reply.view('queue', {scenarios: scenarios}); 
-      });
+     // Scenario.model.find(function(err, scenarios){
+     //   if (err) return console.error(err);
+     //   reply.view('queue', {scenarios: scenarios}); 
+     // });
     }else{
       reply.redirect("/login");
     }
@@ -125,15 +116,15 @@ Server.route({
   handler: function (request, reply){
     var email = request.payload.email;
     var password = request.payload.password;
-    Users.findByEmailAndPassword(email, password, function(err, user){
-      if (err) return console.error(err);
-      if(user !== null){
-        request.yar.set('user', user);
-        reply("Login Success!").code(200);
-      }else{
-        reply("User not found!").code(404);
-      }
-    });
+   // Users.findByEmailAndPassword(email, password, function(err, user){
+   //   if (err) return console.error(err);
+   //   if(user !== null){
+   //     request.yar.set('user', user);
+   //     reply("Login Success!").code(200);
+   //   }else{
+   //     reply("User not found!").code(404);
+   //   }
+   // });
   }
 });
 
@@ -150,14 +141,14 @@ Server.route({
         scenarioObject.author = request.yar.get("user").email;
         scenarioObject.mod_by = request.yar.get("user").email;
         scenarioObject.active = true;
-        Scenario.save(scenarioObject, function(err, result){
-          if (err) {
-            console.error(err);
-            reply("Possible duplicate").code(400);
-          }else{
-            reply("Scenario Saved").code(200);
-          }
-        })
+       // Scenario.save(scenarioObject, function(err, result){
+       //   if (err) {
+       //     console.error(err);
+       //     reply("Possible duplicate").code(400);
+       //   }else{
+       //     reply("Scenario Saved").code(200);
+       //   }
+       // })
       }
     }else{ reply("Not Authenticated").code(403) }
   }
@@ -167,10 +158,10 @@ Server.route({
   method: 'GET',
   path: '/api/scenario/findBy/{id}',
   handler: function (request, reply){
-    Scenario.findById(request.params.id, function(err, scenario){
-      if (err) console.error(err);
-      reply(scenario).code(200);
-    });
+   // Scenario.findById(request.params.id, function(err, scenario){
+   //   if (err) console.error(err);
+   //   reply(scenario).code(200);
+   // });
    }
 });
 
