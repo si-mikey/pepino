@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "SESSION_KEY=$(uuidgen) node index.js",
-    "db_dump": "mysqldump -uroot pepino > lib/sql/base.sql",
-    "db_import": "mysql -uroot pepino < lib/sql/base.sql"
+    "dbdump": "mysqldump -uroot pepino > lib/sql/core.sql",
+    "dbimport": "mysql -uroot pepino < lib/sql/core.sql"
   },
   "repository": {
     "type": "git",

@@ -26,14 +26,10 @@ CREATE TABLE `scenarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `scenario_name` varchar(255) NOT NULL,
   `author` tinyint(4) NOT NULL,
-  `automated` tinyint(4) NOT NULL,
-  `steps` tinyint(4) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `author` (`author`),
-  KEY `fk_steps_id` (`steps`),
-  CONSTRAINT `fk_steps_id` FOREIGN KEY (`steps`) REFERENCES `steps` (`id`),
-  CONSTRAINT `scenarios_ibfk_1` FOREIGN KEY (`author`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `steps` varchar(50) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +38,7 @@ CREATE TABLE `scenarios` (
 
 LOCK TABLES `scenarios` WRITE;
 /*!40000 ALTER TABLE `scenarios` DISABLE KEYS */;
+INSERT INTO `scenarios` VALUES (1,'As a worker I can login',1,'1,2,3',1);
 /*!40000 ALTER TABLE `scenarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +54,7 @@ CREATE TABLE `steps` (
   `step` varchar(255) NOT NULL,
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +63,7 @@ CREATE TABLE `steps` (
 
 LOCK TABLES `steps` WRITE;
 /*!40000 ALTER TABLE `steps` DISABLE KEYS */;
+INSERT INTO `steps` VALUES ('Given','I load the login page',1),('When','I click the login button',2),('Then','I expect to be logged in',3);
 /*!40000 ALTER TABLE `steps` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,8 +78,9 @@ CREATE TABLE `users` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(16) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,6 +89,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'si-mikey','luis@workmarket.com','testing');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -102,4 +102,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-11 16:30:19
+-- Dump completed on 2016-02-22 17:19:40
