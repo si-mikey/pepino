@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "SESSION_KEY=$(uuidgen) node index.js"
+    "start": "SESSION_KEY=$(uuidgen) node index.js",
+    "db_dump": "mysqldump -uroot pepino > lib/sql/base.sql",
+    "db_import": "mysql -uroot pepino < lib/sql/base.sql"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
     "inert": "^3.1.0",
     "jade": "^1.11.0",
     "knex": "^0.10.0",
+    "lodash": "^4.5.1",
     "mysql": "^2.10.2",
     "node-inspector": "^0.12.5",
     "qs": "^4.0.0",

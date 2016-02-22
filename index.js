@@ -6,7 +6,8 @@ var Path = require('path');
 var Vision = require('vision');
 var Inert = require('inert');
 var db = require('./lib/db/database.js');
-var knex = require('./lib/models/users.js');
+var Users = require('./lib/models/users.js');
+var _ = require("lodash");
 //var Scenario = require('./lib/controllers/scenarios.js');
 //var Users = require('./lib/controllers/users.js');
 
@@ -117,15 +118,15 @@ Server.route({
   handler: function (request, reply){
     var email = request.payload.email;
     var password = request.payload.password;
-   // Users.findByEmailAndPassword(email, password, function(err, user){
-   //   if (err) return console.error(err);
-   //   if(user !== null){
-   //     request.yar.set('user', user);
-   //     reply("Login Success!").code(200);
-   //   }else{
-   //     reply("User not found!").code(404);
-   //   }
-   // });
+    Users.findByLogin (email, password, function(user){
+      var user = _.first(user);
+      if(user !== undefined){
+        request.yar.set('user', user);
+        reply("Login Success!").code(200);
+      }else{
+        reply("User not found!").code(404);
+      }
+    });
   }
 });
 
@@ -136,9 +137,7 @@ Server.route({
     if(isAuthenticated(request)){
       if (request.payload !== null){
         var scenarioObject = {};
-        scenarioObject.scenario_name = request.payload.scenario_name;
-        delete request.payload['scenario_name'];
-        scenarioObject.scenario_steps = request.payload;
+        console.log(request.payload);
         scenarioObject.author = request.yar.get("user").email;
         scenarioObject.mod_by = request.yar.get("user").email;
         scenarioObject.active = true;
