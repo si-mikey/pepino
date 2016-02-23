@@ -7,6 +7,7 @@ var Vision = require('vision');
 var Inert = require('inert');
 var db = require('./lib/db/database.js');
 var Users = require('./lib/models/users.js');
+var Scenarios = require('./lib/models/scenarios.js');
 var _ = require("lodash");
 //var Scenario = require('./lib/controllers/scenarios.js');
 //var Users = require('./lib/controllers/users.js');
@@ -163,6 +164,20 @@ Server.route({
    //   reply(scenario).code(200);
    // });
    }
+});
+
+Server.route({
+  method: 'GET',
+  path: '/b',
+  handler: function (request, reply){
+    Scenarios.save({Scenario_name: 'wdawdawdawd',
+         step_type_1: 'Given',
+         step_name_1: 'awdadawdawd',
+         step_type_2: 'Then',
+         step_name_2: 'adwawdadawdawd dawdad' }, function(){ 
+
+    })
+ }
 });
 
 
