@@ -12,6 +12,7 @@ div.fill.container.bod-container
         div.input-group
           div.input-group-addon Scenario Name:
           input.form-control#scenario-name(name="scenario_name", required)
+          input#scen_id(type="hidden", name="scen_id")
   
   div.container.submit-controls
     button#submit-scenario.btn.btn-primary(type='submit') Submit Scenario
@@ -20,7 +21,10 @@ script(type='text/javascript').
   $(document).ready(function(){
     var create = new Create();
     var formValidation = new FormValidation();
-
+    
+    // key between scenario and steps 
+    $("#scen_id").val(guid()); 
+  
     $("#add-step").on("click", function(){
       create.addStep(".form-group", "Step");
     });

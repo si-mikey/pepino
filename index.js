@@ -142,14 +142,9 @@ Server.route({
         scenarioObject.author = request.yar.get("user").email;
         scenarioObject.mod_by = request.yar.get("user").email;
         scenarioObject.active = true;
-       // Scenario.save(scenarioObject, function(err, result){
-       //   if (err) {
-       //     console.error(err);
-       //     reply("Possible duplicate").code(400);
-       //   }else{
-       //     reply("Scenario Saved").code(200);
-       //   }
-       // })
+        Scenarios.save(request.payload, function(result){
+          console.log(typeof result);
+        });
       }
     }else{ reply("Not Authenticated").code(403) }
   }
@@ -164,20 +159,6 @@ Server.route({
    //   reply(scenario).code(200);
    // });
    }
-});
-
-Server.route({
-  method: 'GET',
-  path: '/b',
-  handler: function (request, reply){
-    Scenarios.save({Scenario_name: 'wdawdawdawd',
-         step_type_1: 'Given',
-         step_name_1: 'awdadawdawd',
-         step_type_2: 'Then',
-         step_name_2: 'adwawdadawdawd dawdad' }, function(){ 
-
-    })
- }
 });
 
 
