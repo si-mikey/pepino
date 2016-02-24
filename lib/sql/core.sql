@@ -53,8 +53,9 @@ CREATE TABLE `steps` (
   `type` varchar(10) NOT NULL,
   `step` varchar(255) NOT NULL,
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `scen_id` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +64,7 @@ CREATE TABLE `steps` (
 
 LOCK TABLES `steps` WRITE;
 /*!40000 ALTER TABLE `steps` DISABLE KEYS */;
-INSERT INTO `steps` VALUES ('Given','I load the login page',1),('When','I click the login button',2),('Then','I expect to be logged in',3);
+INSERT INTO `steps` VALUES ('Given','af21sqffdawdfawd',1,'7068c747-a0a1-55fc-94dd-ae39d2a43334'),('Then','awfwafds21swfada adawdawd',2,'7068c747-a0a1-55fc-94dd-ae39d2a43334'),('Given','af21sqffdawdfawd',3,'7068c747-a0a1-55fc-94dd-ae39d2a43334'),('Then','awfwafds21swfada adawdawd',4,'7068c747-a0a1-55fc-94dd-ae39d2a43334'),('Given','awdadawdawd',5,'e00c64a4-e816-bc5b-3c21-5e64a05036c1'),('Then','adwdawdawdawda',6,'e00c64a4-e816-bc5b-3c21-5e64a05036c1'),('Given','awdadawdawd',7,'e00c64a4-e816-bc5b-3c21-5e64a05036c1'),('Then','adwdawdawdawda',8,'e00c64a4-e816-bc5b-3c21-5e64a05036c1');
 /*!40000 ALTER TABLE `steps` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-22 17:19:40
+-- Dump completed on 2016-02-24 16:54:15
