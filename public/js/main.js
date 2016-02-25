@@ -1,4 +1,9 @@
 var Create = function(){};
+var Helper = function(){};
+var Scenario = function(){};
+Helper.prototype.Forms = function(){};
+Helper.prototype.URL = function(){};
+Helper.prototype.Random = function(){};
 
 var stepNameCount = 0;
 Create.prototype.addStep = function(insertionPoint, type){
@@ -39,7 +44,8 @@ Create.prototype.addStepType = function(){
   return selectTypes;
 };
 
-Create.prototype.send = function(scenario){
+// SCENARIO METHODS //
+Scenario.prototype.send = function(scenario){
   return $.ajax({
          type: "POST",
          url: "/api/scenario/send",
@@ -47,8 +53,16 @@ Create.prototype.send = function(scenario){
          });
 };
 
-var FormValidation = function(){};
-FormValidation.prototype.allInputsSet = function(form){
+Scenario.prototype.findById = function(id){
+  return $.ajax({
+         type: "GET",
+         url: "/api/scenario/findBy/" + id,
+         });
+};
+// SCENARIO METHODS //
+
+// HELPER METHODS //
+Helper.Forms.prototype.allInputsSet = function(form){
   var errCount = 0;
   $(form + " .form-control").each(function(){
     if(this.value === null || this.value === ''){
@@ -61,31 +75,14 @@ FormValidation.prototype.allInputsSet = function(form){
   return (errCount > 0) ? false : true; 
 };  
 
-var Login = function(){};
-Login.prototype.authenticate = function(email, pass){
-  return $.ajax({
-         type: "POST",
-         url: "/api/auth",
-         data: {'email': email, 'password': pass} 
-         });
-};
-
-function getParamByName(name) {
+Helper.URL.prototype.getParamByName = function(name) {
   name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
   var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
     results = regex.exec(location.search);
   return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 };
 
-var Queue = function(){};
-Queue.prototype.findById = function(sid){
-  return $.ajax({
-         type: "GET",
-         url: "/api/scenario/findBy/" + sid,
-         });
-};
-
-function guid() {
+Helper.Random.prototype.guid = function() {
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
@@ -94,4 +91,15 @@ function guid() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
     s4() + '-' + s4() + s4() + s4();
 }
+
+// HELPER METHODS //
+
+var Login = function(){};
+Login.prototype.authenticate = function(email, pass){
+  return $.ajax({
+         type: "POST",
+         url: "/api/auth",
+         data: {'email': email, 'password': pass} 
+         });
+};
 

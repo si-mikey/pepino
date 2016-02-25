@@ -138,7 +138,6 @@ Server.route({
     if(isAuthenticated(request)){
       if (request.payload !== null){
         var scenarioObject = {};
-        console.log(request.payload);
         scenarioObject.author = request.yar.get("user").email;
         scenarioObject.mod_by = request.yar.get("user").email;
         scenarioObject.active = true;
