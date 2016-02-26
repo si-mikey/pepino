@@ -9,8 +9,6 @@ var db = require('./lib/db/database.js');
 var Users = require('./lib/models/users.js');
 var Scenarios = require('./lib/models/scenarios.js');
 var _ = require("lodash");
-//var Scenario = require('./lib/controllers/scenarios.js');
-//var Users = require('./lib/controllers/users.js');
 
 Server.connection({port: config.server.port});
 
@@ -69,11 +67,7 @@ Server.route({
     method: 'GET',
     path: '/',
     handler: function(request, reply){
-      if(isAuthenticated(request)){
-        reply.view('create');
-      }else{
-        reply.redirect('/login');
-      }
+      reply.redirect('/create');
     }
 });
 
@@ -82,9 +76,9 @@ Server.route({
   path: '/create',
   handler: function (request, reply){
     if(isAuthenticated(request)){
-      reply.view('create');
+      reply.view('create', {user: request.yar.get('user')});
     }else{
-      reply.redirect("/login");
+      reply.redirect('/login');
     }
   }
 });
@@ -93,7 +87,11 @@ Server.route({
   method: 'GET',
   path: '/login',
   handler: function (request, reply){
-    reply.view('login'); 
+    if(!isAuthenticated(reqest)){ 
+      reply.view('login');
+    }else{
+      reply.redirect('/');
+    }
   }
 });
 
@@ -159,6 +157,17 @@ Server.route({
    // });
    }
 });
+
+Server.route({
+  method: 'GET',
+  path: '/logout',
+  handler: function (request, reply){
+    request.yar.reset('user');
+    reply.redirect('/login');
+  }
+});
+
+
 
 
 Server.start(function(){
