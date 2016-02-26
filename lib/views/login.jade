@@ -15,7 +15,7 @@ div.fill.container.bod-container#login-page
 
 script(type='text/javascript').
   $(document).ready(function(){
-    var login = new Login;
+    var login = new Login();
     $("#signin-form").on("submit", function(event){
       event.preventDefault();
       event.stopPropagation();
@@ -27,7 +27,7 @@ script(type='text/javascript').
           window.location.replace("?login=false");
         });
     });
-    var loginStatus =  getParamByName('login');
+    var loginStatus = Helper.URL.getParamByName('login');
     if(loginStatus === 'false')
       $(".action-status").addClass("alert-danger").html("Incorrect email/password combination");
 

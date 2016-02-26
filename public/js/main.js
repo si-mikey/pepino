@@ -1,9 +1,5 @@
 var Create = function(){};
-var Helper = function(){};
 var Scenario = function(){};
-Helper.prototype.Forms = function(){};
-Helper.prototype.URL = function(){};
-Helper.prototype.Random = function(){};
 
 var stepNameCount = 0;
 Create.prototype.addStep = function(insertionPoint, type){
@@ -45,7 +41,7 @@ Create.prototype.addStepType = function(){
 };
 
 // SCENARIO METHODS //
-Scenario.prototype.send = function(scenario){
+Scenario.prototype.save = function(scenario){
   return $.ajax({
          type: "POST",
          url: "/api/scenario/send",
@@ -61,38 +57,43 @@ Scenario.prototype.findById = function(id){
 };
 // SCENARIO METHODS //
 
-// HELPER METHODS //
-Helper.Forms.prototype.allInputsSet = function(form){
-  var errCount = 0;
-  $(form + " .form-control").each(function(){
-    if(this.value === null || this.value === ''){
-      $(this).addClass("has-err");
-      errCount += 1; 
-    }else{
-      $(this).removeClass("has-err");
-    }
-  })
-  return (errCount > 0) ? false : true; 
-};  
-
-Helper.URL.prototype.getParamByName = function(name) {
-  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-    results = regex.exec(location.search);
-  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-};
-
-Helper.Random.prototype.guid = function() {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-    s4() + '-' + s4() + s4() + s4();
+// HELPERS //
+var Helper = {
+      Forms: { 
+        allInputsSet:  function(form){
+          var errCount = 0;
+          $(form + " .form-control").each(function(){
+            if(this.value === null || this.value === ''){
+              $(this).addClass("has-err");
+              errCount += 1; 
+            }else{
+              $(this).removeClass("has-err");
+            }
+          })
+          return (errCount > 0) ? false : true; 
+        }  
+      },
+      URL: {
+        getParamByName: function(name) {
+          name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+          var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+          return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+      },
+      Random: {
+        guid: function() {
+          function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+              .toString(16)
+              .substring(1);
+          }
+          return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+            s4() + '-' + s4() + s4() + s4();
+        }
+      }
 }
-
-// HELPER METHODS //
+// HELPERS //
 
 var Login = function(){};
 Login.prototype.authenticate = function(email, pass){

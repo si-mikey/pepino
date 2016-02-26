@@ -19,11 +19,12 @@ div.fill.container.bod-container
 
 script(type='text/javascript').
   $(document).ready(function(){
-    var create = new Create();
-    var formValidation = new FormValidation();
+    var scenario = new Scenario();
+    var formValidation = new Helper.Forms();
+    var random = new Helper.Random();
     
     // key between scenario and steps 
-    $("#scen_id").val(guid()); 
+    $("#scen_id").val(random.guid()); 
   
     $("#add-step").on("click", function(){
       create.addStep(".form-group", "Step");
@@ -46,7 +47,7 @@ script(type='text/javascript').
       _.each($(this).serializeArray(), function(o){
         scenarioObject[o.name] = o.value;
       });
-      create.send(scenarioObject).done(function(){
+      create.save(scenarioObject).done(function(){
         $(".action-status").addClass("alert-success").html("Succesfully submitted scenario");
       }).fail(function(err){
         console.log(err);
@@ -54,11 +55,10 @@ script(type='text/javascript').
       }).always(function(){
         window.setTimeout(function(){
           $(".action-status").removeClass("alert-success").removeClass("alert-danger").html("");
-        }, 3000);
+        }, 5000);
       });
     });
   });
-
 
 
 include footer.jade
