@@ -20,12 +20,11 @@ div.fill.container.bod-container
 script(type='text/javascript').
   $(document).ready(function(){
     var scenario = new Scenario();
-    var formValidation = new Helper.Forms();
-    var random = new Helper.Random();
-    
+    var create = new Create();
+   
     // key between scenario and steps 
-    $("#scen_id").val(random.guid()); 
-  
+    $("#scen_id").val(Helper.Random.guid()); 
+   
     $("#add-step").on("click", function(){
       create.addStep(".form-group", "Step");
     });
@@ -47,7 +46,7 @@ script(type='text/javascript').
       _.each($(this).serializeArray(), function(o){
         scenarioObject[o.name] = o.value;
       });
-      create.save(scenarioObject).done(function(){
+      Scenario.save(scenarioObject).done(function(){
         $(".action-status").addClass("alert-success").html("Succesfully submitted scenario");
       }).fail(function(err){
         console.log(err);
