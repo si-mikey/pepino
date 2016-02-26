@@ -28,6 +28,7 @@ CREATE TABLE `scenarios` (
   `author` tinyint(4) NOT NULL,
   `steps` varchar(50) DEFAULT NULL,
   `active` tinyint(1) DEFAULT NULL,
+  `scen_id` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,7 +39,7 @@ CREATE TABLE `scenarios` (
 
 LOCK TABLES `scenarios` WRITE;
 /*!40000 ALTER TABLE `scenarios` DISABLE KEYS */;
-INSERT INTO `scenarios` VALUES (1,'As a worker I can login',1,'1,2,3',1);
+INSERT INTO `scenarios` VALUES (1,'As a worker I can login',1,'1,2,3',1,'');
 /*!40000 ALTER TABLE `scenarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,4 +104,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-24 16:54:15
+-- Dump completed on 2016-02-26 16:59:45

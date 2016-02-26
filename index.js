@@ -87,7 +87,7 @@ Server.route({
   method: 'GET',
   path: '/login',
   handler: function (request, reply){
-    if(!isAuthenticated(reqest)){ 
+    if(!isAuthenticated(request)){ 
       reply.view('login');
     }else{
       reply.redirect('/');
