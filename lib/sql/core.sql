@@ -26,7 +26,6 @@ CREATE TABLE `scenarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `scenario_name` varchar(255) NOT NULL,
   `author` tinyint(4) NOT NULL,
-  `steps` varchar(50) DEFAULT NULL,
   `active` tinyint(1) DEFAULT NULL,
   `scen_id` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
@@ -39,7 +38,7 @@ CREATE TABLE `scenarios` (
 
 LOCK TABLES `scenarios` WRITE;
 /*!40000 ALTER TABLE `scenarios` DISABLE KEYS */;
-INSERT INTO `scenarios` VALUES (1,'As a worker I can login',1,'1,2,3',1,'');
+INSERT INTO `scenarios` VALUES (1,'About - Hello WorldAbouawdadt - Hello WorldAbout - Hello WorldAbout - Hello World',1,1,'6cacaad2-15b8-f40e-ccd0-7880b35475a3');
 /*!40000 ALTER TABLE `scenarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,7 +55,7 @@ CREATE TABLE `steps` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `scen_id` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +64,7 @@ CREATE TABLE `steps` (
 
 LOCK TABLES `steps` WRITE;
 /*!40000 ALTER TABLE `steps` DISABLE KEYS */;
-INSERT INTO `steps` VALUES ('Given','af21sqffdawdfawd',1,'7068c747-a0a1-55fc-94dd-ae39d2a43334'),('Then','awfwafds21swfada adawdawd',2,'7068c747-a0a1-55fc-94dd-ae39d2a43334'),('Given','af21sqffdawdfawd',3,'7068c747-a0a1-55fc-94dd-ae39d2a43334'),('Then','awfwafds21swfada adawdawd',4,'7068c747-a0a1-55fc-94dd-ae39d2a43334'),('Given','awdadawdawd',5,'e00c64a4-e816-bc5b-3c21-5e64a05036c1'),('Then','adwdawdawdawda',6,'e00c64a4-e816-bc5b-3c21-5e64a05036c1'),('Given','awdadawdawd',7,'e00c64a4-e816-bc5b-3c21-5e64a05036c1'),('Then','adwdawdawdawda',8,'e00c64a4-e816-bc5b-3c21-5e64a05036c1');
+INSERT INTO `steps` VALUES ('Given','dad - Hello WorldAbout - Headawdadwllo WorldAbout - Hello World',1,'6cacaad2-15b8-f40e-ccd0-7880b35475a3'),('And','awdawdvAbout - Hello WorldAbout - Hello WorldAbout - Hello World',2,'6cacaad2-15b8-f40e-ccd0-7880b35475a3'),('When','dawAbout - Hello WorldAbout - Hello WorldAbout - Hello awdaw',3,'6cacaad2-15b8-f40e-ccd0-7880b35475a3'),('Then','About - Hello WorldAbout - Hello WorldAbout - Hello Worldadawd',4,'6cacaad2-15b8-f40e-ccd0-7880b35475a3');
 /*!40000 ALTER TABLE `steps` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-26 16:59:45
+-- Dump completed on 2016-03-02 17:16:12
