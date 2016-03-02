@@ -45,7 +45,7 @@ Scenario.prototype.save = function(scenario){
   return $.ajax({
          type: "POST",
          url: "/api/scenario/send",
-         data: scenario 
+         data: scenario
          });
 };
 

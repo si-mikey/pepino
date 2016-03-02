@@ -7,7 +7,7 @@ var Vision = require('vision');
 var Inert = require('inert');
 var db = require('./lib/db/database.js');
 var Users = require('./lib/models/users.js');
-var Scenarios = require('./lib/models/scenarios.js');
+var Scenario = require('./lib/models/scenarios.js');
 var _ = require("lodash");
 
 Server.connection({port: config.server.port});
@@ -135,13 +135,19 @@ Server.route({
   handler: function (request, reply){
     if(isAuthenticated(request)){
       if (request.payload !== null){
-        var scenarioObject = {};
-        scenarioObject.author = request.yar.get("user").email;
-        scenarioObject.mod_by = request.yar.get("user").email;
-        scenarioObject.active = true;
-        Scenarios.save(request.payload, function(result){
-          console.log(typeof result);
-        });
+        var so = {};
+        so['user'] = request.yar.get('user');
+        so['scenario'] = request.payload;
+        Scenario.saveSteps(so, function(err, rows){
+          if (err) return console.error;
+          if (_.first(rows) > 0){
+            Scenario.saveScenario(so, function(err, rows){
+              if (err) return console.error;
+              if (_.first(rows) > 0)
+                reply("Scenario Saved.").code(200);
+            });
+          }
+        }); 
       }
     }else{ reply("Not Authenticated").code(403) }
   }
