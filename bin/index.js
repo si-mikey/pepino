@@ -6,6 +6,7 @@ var Vision = require('vision');
 var Inert = require('inert');
 var _ = require("lodash");
 var config = require('../../config/config');
+const Users = require('../../lib/models/users');
 
 ////////// APP CONFIG //////////
 Server.connection({port: config.server.port});
@@ -53,16 +54,25 @@ Server.route({
     } 
 });
 
-Server.ext('onRequest', isAuthenticated);
+Server.ext('onRequest', Authenticated);
 ////////// APP CONFIG //////////
 
 
-function isAuthenticated(request, reply){
-  let path = request.path;
-  if(path.match(/public/) || path == '/login' || path == '/api/auth') {
+function Authenticated(request, reply){
+  const path = request.path;
+  if(path == '/create' || path == '/queue' || path == 'manage') {
+    try {
+      if(request.yar.get('user') !== undefined) {
+        reply.continue();
+      } else {
+        reply.redirect('/login');
+      }
+    } catch (err) {
+      console.log(err);
+      reply.redirect('/login');
+    }
+  } else { 
     reply.continue();
-  } else if (request.yar === undefined) {
-    reply.redirect('/login');
   }
 };
 
