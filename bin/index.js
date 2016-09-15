@@ -1,15 +1,13 @@
 var Hapi = require('hapi');
 var Server = new Hapi.Server({debug: {request: ['error']}});
-var config = require('./config/config.js');
 var Jade = require('jade');
 var Path = require('path');
 var Vision = require('vision');
 var Inert = require('inert');
-var db = require('./lib/db/database.js');
-var Users = require('./lib/models/users.js');
-var Scenario = require('./lib/models/scenarios.js');
 var _ = require("lodash");
+var config = require('../../config/config');
 
+////////// APP CONFIG //////////
 Server.connection({port: config.server.port});
 
 Server.register(Vision, function(err){
@@ -37,7 +35,7 @@ Server.views({
   engines: {
     jade: Jade
   },
-  relativeTo: __dirname + '/lib',
+  relativeTo: process.cwd() + '/lib',
   path: 'views',
   isCached: process.env.ENV === 'prod'
 });
@@ -47,7 +45,7 @@ Server.route({
   path: '/public/{path*}',
     handler: {
       directory: {
-        path: Path.join(__dirname + '/public'),
+        path: Path.join(process.cwd() + '/public'),
         listing: false,
         index: false,
         redirectToSlash: false
@@ -55,13 +53,19 @@ Server.route({
     } 
 });
 
-function isAuthenticated(req){
-  if(req.yar.get("user")){
-    return true;
-  }else{
-    return false;
-  } 
+Server.ext('onRequest', isAuthenticated);
+////////// APP CONFIG //////////
+
+
+function isAuthenticated(request, reply){
+  let path = request.path;
+  if(path.match(/public/) || path == '/login' || path == '/api/auth') {
+    reply.continue();
+  } else if (request.yar === undefined) {
+    reply.redirect('/login');
+  }
 };
+
 
 Server.route({
     method: 'GET',
@@ -71,46 +75,16 @@ Server.route({
     }
 });
 
-Server.route({
-  method: 'GET',
-  path: '/create',
-  handler: function (request, reply){
-    if(isAuthenticated(request)){
-      reply.view('create', {user: request.yar.get('user')});
-    }else{
-      reply.redirect('/login');
-    }
-  }
-});
 
 Server.route({
   method: 'GET',
   path: '/login',
   handler: function (request, reply){
-    if(!isAuthenticated(request)){ 
-      reply.view('login');
-    }else{
-      reply.redirect('/');
-    }
+    reply.view('login');
   }
 });
 
-Server.route({
-  method: 'GET',
-  path: '/queue',
-  handler: function (request, reply){
-    if(isAuthenticated(request)){
-     // Scenario.model.find(function(err, scenarios){
-     //   if (err) return console.error(err);
-     //   reply.view('queue', {scenarios: scenarios}); 
-     // });
-    }else{
-      reply.redirect("/login");
-    }
-  }
-});
 
-// API ROUTES 
 Server.route({
   method: 'POST',
   path: '/api/auth',
@@ -129,40 +103,39 @@ Server.route({
   }
 });
 
+
+Server.route({
+  method: 'GET',
+  path: '/create',
+  handler: function (request, reply){
+    reply.view('create', {user: request.yar.get('user')});
+  }
+});
+
+
+Server.route({
+  method: 'GET',
+  path: '/queue',
+  handler: function (request, reply){
+  }
+});
+
+
 Server.route({
   method: 'POST',
   path: '/api/scenario/send',
   handler: function (request, reply){
-    if(isAuthenticated(request)){
-      if (request.payload !== null){
-        var so = {};
-        so['user'] = request.yar.get('user');
-        so['scenario'] = request.payload;
-        Scenario.saveSteps(so, function(err, rows){
-          if (err) return console.error;
-          if (_.first(rows) > 0){
-            Scenario.saveScenario(so, function(err, rows){
-              if (err) return console.error;
-              if (_.first(rows) > 0)
-                reply("Scenario Saved.").code(200);
-            });
-          }
-        }); 
-      }
-    }else{ reply("Not Authenticated").code(403) }
   }
 });
+
 
 Server.route({
   method: 'GET',
   path: '/api/scenario/findBy/{id}',
   handler: function (request, reply){
-   // Scenario.findById(request.params.id, function(err, scenario){
-   //   if (err) console.error(err);
-   //   reply(scenario).code(200);
-   // });
    }
 });
+
 
 Server.route({
   method: 'GET',
@@ -172,8 +145,6 @@ Server.route({
     reply.redirect('/login');
   }
 });
-
-
 
 
 Server.start(function(){

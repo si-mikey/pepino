@@ -29,3 +29,7 @@ node_modules
 
 # eclim
 workbench.xmi
+
+.DS_Store
+
+/bin/dist
