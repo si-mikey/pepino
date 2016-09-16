@@ -6,7 +6,7 @@ div.dropzone#dropzone
   
 div.stepszone#stepzone
   div.section framework Interactions 
-  div.draggable.drag-drop#dragger When I load the "{val}" page
+  div.draggable.drag-drop When I load the "{val}" page
   div.section User Interactions
   div.draggable.drag-drop When I set my notifications to {opt|val}
   div.draggable.drag-drop Given I am Logged In as "{val}"
@@ -53,7 +53,8 @@ script(type='text/javascript').
   );
 
   drake.on('drop', function(e, t, so, si) {
-    if($(e).hasClass('dropped')) {
+    var par = $(e).parent().attr('id');
+    if($(e).hasClass('dropped') ||  par == 'stepzone') {
       return;
     }
     var edit = document.createElement('span');
@@ -61,7 +62,6 @@ script(type='text/javascript').
     $(e).addClass('dropped');
     $(e).append(edit);
   })
-
 
   // remove the step 
   $("body").on("dblclick", '.dropzone .draggable',  function() {
