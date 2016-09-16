@@ -117,17 +117,85 @@ html, body{
 .dropzone { 
   border: 2px solid #ddd;
   height: 95%;
-  width: 50%;
+  width: 65%;
   float: left;
   margin: 55px 5px 0px 5px;
+  background-color: #ddd;
+  position: relative;
 }
+
+.dropzone .btn-primary {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.dropzone .draggable {
+  width: 100%;
+  text-align: center;
+}
+
+.dzheader {
+  background-color: #F7961D;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.dropzone .draggable span {
+  float: right;
+  margin-right: 5px;
+}
+
 .stepszone {
   border: 2px solid #aaa;
   height: 95%;
   width: 30%;
   float: right;
   margin: 55px 5px 0px 0px;
+  overflow: scroll;
 }
+
+.section {
+  border: 1px solid #999;
+  text-align: center;
+  font-weight: bold;
+  background-color: #F7961D;
+  color: #fff;
+}
+
+.drop-active {
+  border-color: #aaa;
+}
+
+.drop-target {
+  background-color: #29e;
+  border-color: #fff;
+  border-style: solid;
+}
+
+.drag-drop {
+  display: inline-block;
+  min-width: 40px;
+  padding: 3px;
+  color: #fff;
+  background-color: #29e;
+  border: solid 2px #fff;
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+  transition: background-color 0.3s;
+  cursor: move;
+  cursor: grab;
+}
+
+.drag-drop.can-drop {
+  color: #000;
+  background-color: #4e4;
+}
+
+
 
 /* drag page style */
 

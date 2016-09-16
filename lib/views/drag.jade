@@ -1,13 +1,22 @@
 include header.jade
 
-div.dropzone
-
-
-div.stepszone
-  div.draggable.drag-drop Given I am Logged In as ""
-  div.sections When I create an assignment with {|opt|val|}
-  div.sections When I route the assignment to ""
-  div.draggable.drag-drop When I load the "" page
+div.dropzone#dropzone
+  div.dzheader Build Your Action
+  button(type='button').btn.btn-primary Generate
+  
+div.stepszone#stepzone
+  div.section framework Interactions 
+  div.draggable.drag-drop#dragger When I load the "{val}" page
+  div.section User Interactions
+  div.draggable.drag-drop When I set my notifications to {opt|val}
+  div.draggable.drag-drop Given I am Logged In as "{val}"
+  div.section Assignments Interactions
+  div.draggable.drag-drop When I create an assignment with {|opt|val|}
+  div.draggable.drag-drop When I route the assignment to "{val}"
+  div.draggable.drag-drop When I search for assignment on dashboard {opt|val}
+  div.draggable.drag-drop When I void the assignment {opt|val}
+  div.draggable.drag-drop When I complete the assignment {opt|val}
+  div.section Creation Interactions
   div.draggable.drag-drop When I create a Test {|opt|val|}
   div.draggable.drag-drop When I create a Survey {|opt|val|}
   div.draggable.drag-drop When I create a Project {|opt|val|}
@@ -18,19 +27,54 @@ div.stepszone
   div.draggable.drag-drop When I create a new talent pool {|opt|val}
   div.draggable.drag-drop When I create a new campaign {|opt|val}
   div.draggable.drag-drop When I create a new invitation {|opt|val}
+  div.section Search Interactions
   div.draggable.drag-drop When I set the search filters to {opt|val} 
   div.draggable.drag-drop When I search for a talent {opt|val} 
+  div.section Payments Interactions
   div.draggable.drag-drop When I add funds {opt|val}
   div.draggable.drag-drop When I manage funds {opt|val}
   div.draggable.drag-drop When I add a new payment account {opt|val}
+  div.draggable.drag-drop When I create a new custom report {opt|val}
+  div.section Misc Interactions
+  div.draggable.drag-drop When I create cookie {opt|val}
+  div.draggable.drag-drop When I make a URL request to {opt|val}
 
 
 
+script(type='text/javascript').
+  var drake = dragula([document.querySelector('#stepzone'), 
+    document.querySelector('#dropzone')], 
+    {copy: true,
+     copySortSource: true,
+     }
+  );
 
+  drake.on('drop', function(e, t, so, si) {
+    if($(e).hasClass('dropped')) {
+      return;
+    }
+    var edit = document.createElement('span');
+    edit.className = 'glyphicon glyphicon-pencil edit';
+    $(e).addClass('dropped');
+    $(e).append(edit);
+  })
 
+  // remove the step 
+  $("body").on("dblclick", '.dropzone .draggable',  function() {
+    $(this).remove();
+  });
 
+  // make step editable
+  $("body").on("click", '.dropzone .draggable .edit', function() {
+    $(this).parent().attr('contenteditable', 'true');
+  });
 
-
+  // stop editing step
+  $("body").on('keydown', '.dropzone .draggable', function(e){
+    if(e.keyCode == 13){
+      $(this).attr('contenteditable', 'false'); 
+    }
+  });
 
 
 include footer.jade
