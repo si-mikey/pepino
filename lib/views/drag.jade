@@ -15,7 +15,7 @@ div.stepszone#stepzone
   div.draggable.drag-drop When I route the assignment to "{val}"
   div.draggable.drag-drop When I search for assignment on dashboard {opt|val}
   div.draggable.drag-drop When I void the assignment {opt|val}
-  div.draggable.drag-drop When I complete the assignment {opt|val}
+  div.draggable.drag-drop Then I complete the assignment {opt|val}
   div.section Creation Interactions
   div.draggable.drag-drop When I create a Test {|opt|val|}
   div.draggable.drag-drop When I create a Survey {|opt|val|}
@@ -46,6 +46,9 @@ script(type='text/javascript').
     document.querySelector('#dropzone')], 
     {copy: true,
      copySortSource: true,
+     invalid: function(el, handle) {
+      return el.className == 'section' || el.className == 'dzheader';
+     }
      }
   );
 
@@ -58,6 +61,7 @@ script(type='text/javascript').
     $(e).addClass('dropped');
     $(e).append(edit);
   })
+
 
   // remove the step 
   $("body").on("dblclick", '.dropzone .draggable',  function() {

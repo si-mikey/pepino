@@ -144,6 +144,12 @@ html, body{
   color: #fff;
 }
 
+.stepszone .draggable {
+  width: 100%;
+}
+
+
+
 .dropzone .draggable span {
   float: right;
   margin-right: 5px;
@@ -196,15 +202,7 @@ html, body{
 }
 
 
-
 /* drag page style */
-
-
-
-
-
-
-
 
 
 /* Body styles */
