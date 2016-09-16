@@ -112,7 +112,39 @@ html, body{
 /* QUEUE PAGE STYLE */
 
 
+/* drag page style */
+
+.dropzone { 
+  border: 2px solid #ddd;
+  height: 95%;
+  width: 50%;
+  float: left;
+  margin: 55px 5px 0px 5px;
+}
+.stepszone {
+  border: 2px solid #aaa;
+  height: 95%;
+  width: 30%;
+  float: right;
+  margin: 55px 5px 0px 0px;
+}
+
+/* drag page style */
+
+
+
+
+
+
+
+
+
 /* Body styles */
+
+
+
+
+
 
 
 /* Footer styles */
