@@ -54,27 +54,15 @@ Server.route({
     } 
 });
 
-Server.ext('onRequest', Authenticated);
 ////////// APP CONFIG //////////
 
-
-function Authenticated(request, reply){
-  const path = request.path;
-  if(path == '/create' || path == '/queue' || path == 'manage') {
-    try {
-      if(request.yar.get('user') !== undefined) {
-        reply.continue();
-      } else {
-        reply.redirect('/login');
-      }
-    } catch (err) {
-      console.log(err);
-      reply.redirect('/login');
-    }
-  } else { 
+function Authenticated (request, reply) {
+  if(request.yar.get('user') !== undefined) {
     reply.continue();
+  } else {
+    reply.redirect('/login');
   }
-};
+}
 
 
 Server.route({
@@ -155,6 +143,22 @@ Server.route({
     reply.redirect('/login');
   }
 });
+
+
+Server.route({
+  method: 'GET',
+  path: '/drag',
+  handler: function (request, reply){
+    reply.view('drag'); 
+  }
+});
+
+
+
+
+
+
+
 
 
 Server.start(function(){
